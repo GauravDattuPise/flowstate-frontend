@@ -44,6 +44,12 @@ const rows = [
 
 export default function CustomizedTables({user}) {
     // console.log(user)
+    // let checkFocus;
+    // if(user.calActivityFlowState >= 80 && user.calActivityFlowState <= 120){
+    //   checkFocus = "Focused"
+    // }else{
+    //   checkFocus = "Out of Focus"
+    // }
   return (
     <TableContainer component={Paper} className='tableDesign' >
       <Table sx={{  minWidth : 700 }} aria-label="customized table">
@@ -59,6 +65,8 @@ export default function CustomizedTables({user}) {
             <StyledTableCell align="right">calculated base focus</StyledTableCell>
             <StyledTableCell align="right">New HRV</StyledTableCell>
             <StyledTableCell align="right">calculated Activity Flow State</StyledTableCell>
+            <StyledTableCell align="right">Focus</StyledTableCell>
+          
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,11 +79,21 @@ export default function CustomizedTables({user}) {
               <StyledTableCell align="right">{user.mobile}</StyledTableCell>
               <StyledTableCell align="right">{user.score}</StyledTableCell>
               <StyledTableCell align="right">{user.total}</StyledTableCell>
-              <StyledTableCell align="right">{user.hrv}</StyledTableCell>
               <StyledTableCell align="right">{user.percentage}</StyledTableCell>
+              <StyledTableCell align="right">{user.hrv}</StyledTableCell>
               <StyledTableCell align="right">{user.calBaseFocus}</StyledTableCell>
               <StyledTableCell align="right">{user.newHrv}</StyledTableCell>
               <StyledTableCell align="right">{user.calActivityFlowState}</StyledTableCell>
+              
+              {
+               ( user.calActivityFlowState >= 80 && user.calActivityFlowState <= 120) 
+                ?
+                <StyledTableCell align="right" className='focus'>Focused</StyledTableCell>
+                :
+                <StyledTableCell align="right" className='outOfFocus'>out of focus</StyledTableCell>
+              }             
+              
+            
             </StyledTableRow>
           ))}
         </TableBody>

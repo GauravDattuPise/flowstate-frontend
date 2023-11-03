@@ -60,9 +60,9 @@ const FlowState = () => {
 
             // sending data to backend
 
-            const res = await axios.post("http://localhost:5000/flowstate/createFlowState", userObj);
-            if(res.data.status){
-                toast.success("flow state saved successfully");
+            // const res = await axios.post("http://localhost:5000/flowstate/createFlowState", userObj);
+            // if(res.data.status){
+            //     toast.success("flow state saved successfully");
 
                 // reseting user inputs
                 setInputs({
@@ -77,7 +77,7 @@ const FlowState = () => {
                     newHrv: "",
                     calActivityFlowState: ""
                 });
-            }
+            // }
 
         } catch (error) {
             console.log("error in creating flow state", error);
@@ -92,7 +92,7 @@ const FlowState = () => {
         if (inputs.score !== "" && inputs.total !== "") {
             setInputs((prevState) => ({
                 ...prevState,
-                percentage: inputs.score / inputs.total * 100
+                percentage: (inputs.score / inputs.total * 100).toFixed(2)
             }))
         } else {
             setInputs((prevState) => ({
@@ -105,7 +105,7 @@ const FlowState = () => {
         if (inputs.hrv !== "" && inputs.percentage !== "") {
             setInputs((prevState) => ({
                 ...prevState,
-                calBaseFocus: 100 * inputs.hrv / inputs.percentage
+                calBaseFocus: (100 * inputs.hrv / inputs.percentage).toFixed(2)
             }))
         } else {
             setInputs((prevState) => ({
@@ -118,7 +118,7 @@ const FlowState = () => {
         if (inputs.calBaseFocus !== "" && inputs.newHrv !== "") {
             setInputs((prevState) => ({
                 ...prevState,
-                calActivityFlowState: inputs.newHrv * 100 / inputs.calBaseFocus
+                calActivityFlowState: (inputs.newHrv * 100 / inputs.calBaseFocus).toFixed(2)
             }))
         } else {
             setInputs((prevState) => ({
@@ -126,6 +126,10 @@ const FlowState = () => {
                 calActivityFlowState: ""
             }))
         }
+
+        
+
+
     },[inputs])
 
     useEffect(() => {
